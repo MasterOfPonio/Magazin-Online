@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShopZone — Your Online Store</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    body { padding-top: 50px; }
+    .navbar-brand { font-weight: bold; font-size: 22px; letter-spacing: 1px; }
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff; padding: 100px 0 80px; text-align: center;
+    }
+    .hero h1 { font-size: 48px; font-weight: 700; margin-bottom: 20px; }
+    .hero p  { font-size: 20px; color: #ccc; margin-bottom: 35px; }
+    .btn-hero {
+      background: #e94560; color: #fff; border: none;
+      padding: 14px 40px; font-size: 18px; border-radius: 4px;
+    }
+    .btn-hero:hover { background: #c73652; color: #fff; }
+    .features { background: #f8f9fa; padding: 50px 0; }
+    .feature-item { text-align: center; padding: 20px; }
+    .feature-item .fa { font-size: 40px; color: #0f3460; margin-bottom: 15px; }
+    .feature-item h4 { font-weight: 700; }
+    .categories { padding: 60px 0; }
+    .categories h2 { text-align: center; font-weight: 700; margin-bottom: 40px; }
+    .category-card {
+      border: 1px solid #e0e0e0; border-radius: 6px;
+      overflow: hidden; text-align: center; transition: box-shadow 0.2s;
+    }
+    .category-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+    .category-card .cat-icon { background: #0f3460; color: #fff; font-size: 48px; padding: 40px 0; }
+    .category-card .cat-body { padding: 20px; }
+    .category-card h4 { font-weight: 700; margin-bottom: 8px; }
+    .category-card p { color: #666; font-size: 14px; }
+    .btn-shop { background: #0f3460; color: #fff; border: none; padding: 8px 24px; border-radius: 4px; }
+    .btn-shop:hover { background: #16213e; color: #fff; }
+    .cta-banner {
+      background: #0f3460; color: #fff;
+      padding: 50px; text-align: center; border-radius: 6px; margin: 0 15px 60px;
+    }
+    footer { background: #1a1a2e; color: #aaa; padding: 30px 0; text-align: center; font-size: 14px; }
+    footer a { color: #e94560; }
+  </style>
+  {% if messages %}{% for message in messages %}
+  <script>window.addEventListener('DOMContentLoaded',function(){alert("{{ message }}");});</script>
+  {% endfor %}{% endif %}
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNavBar">
+          <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'index' %}">&#128722; ShopZone</a>
+      </div>
+      <div class="collapse navbar-collapse" id="mainNavBar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Deals</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ user.username }}</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+          <li>
+            <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link navbar-btn" style="color:#9d9d9d; padding:15px;">
+                <span class="glyphicon glyphicon-log-out"></span> Logout
+              </button>
+            </form>
+          </li>
+          {% else %}
+          <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      {% if user.is_authenticated %}
+      <h1>Welcome back, {{ user.username }}! &#128075;</h1>
+      <p>Pick up where you left off. New arrivals are waiting for you.</p>
+      <a href="#" class="btn btn-hero">Browse Shop</a>
+      {% else %}
+      <h1>Everything You Need,<br>Delivered to Your Door</h1>
+      <p>Shop thousands of products at unbeatable prices.</p>
+      <a href="{% url 'register' %}" class="btn btn-hero">Get Started &mdash; It&rsquo;s Free</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 feature-item">
+          <i class="fa fa-truck"></i>
+          <h4>Free Shipping</h4>
+          <p>On all orders over $50</p>
+        </div>
+        <div class="col-sm-3 feature-item">
+          <i class="fa fa-refresh"></i>
+          <h4>Easy Returns</h4>
+          <p>30-day hassle-free returns</p>
+        </div>
+        <div class="col-sm-3 feature-item">
+          <i class="fa fa-lock"></i>
+          <h4>Secure Payments</h4>
+          <p>100% secure checkout</p>
+        </div>
+        <div class="col-sm-3 feature-item">
+          <i class="fa fa-headphones"></i>
+          <h4>24/7 Support</h4>
+          <p>We&rsquo;re here to help</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories">
+    <div class="container">
+      <h2>Shop by Category</h2>
+      <div class="row">
+        <div class="col-sm-3 col-xs-6" style="margin-bottom:30px;">
+          <div class="category-card">
+            <div class="cat-icon"><i class="fa fa-laptop"></i></div>
+            <div class="cat-body"><h4>Electronics</h4><p>Phones, laptops &amp; more</p><a href="#" class="btn btn-shop">Shop Now</a></div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-6" style="margin-bottom:30px;">
+          <div class="category-card">
+            <div class="cat-icon"><i class="fa fa-tags"></i></div>
+            <div class="cat-body"><h4>Fashion</h4><p>Clothing &amp; accessories</p><a href="#" class="btn btn-shop">Shop Now</a></div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-6" style="margin-bottom:30px;">
+          <div class="category-card">
+            <div class="cat-icon"><i class="fa fa-home"></i></div>
+            <div class="cat-body"><h4>Home &amp; Living</h4><p>Furniture &amp; decor</p><a href="#" class="btn btn-shop">Shop Now</a></div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-6" style="margin-bottom:30px;">
+          <div class="category-card">
+            <div class="cat-icon"><i class="fa fa-futbol-o"></i></div>
+            <div class="cat-body"><h4>Sports</h4><p>Gear &amp; equipment</p><a href="#" class="btn btn-shop">Shop Now</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% if not user.is_authenticated %}
+  <div class="container">
+    <div class="cta-banner">
+      <h2 style="margin-top:0;">New here? Create a free account</h2>
+      <p style="font-size:16px; color:#ccc;">Join thousands of happy customers and start shopping today.</p>
+      <a href="{% url 'register' %}" class="btn btn-hero" style="margin-right:10px;">Sign Up Free</a>
+      <a href="{% url 'login' %}" class="btn btn-default" style="padding:8px 24px;">Log In</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 <strong>ShopZone</strong>. All rights reserved. &nbsp;|&nbsp;
+        <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
