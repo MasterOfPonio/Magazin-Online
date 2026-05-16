@@ -1,0 +1,91 @@
+body {
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-minimal {
+  margin-bottom: 0;
+}
+
+.navbar-brand-bold {
+  font-weight: bold;
+}
+
+.auth-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 15px;
+}
+
+.auth-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.auth-card .brand {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f3460;
+  margin-bottom: 8px;
+}
+
+.auth-card .subtitle {
+  text-align: center;
+  color: #888;
+  margin-bottom: 30px;
+  font-size: 15px;
+}
+
+.btn-primary-custom {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.btn-primary-custom:hover {
+  background: #c73652;
+  color: #fff;
+}
+
+.divider {
+  text-align: center;
+  color: #bbb;
+  margin: 20px 0;
+  font-size: 13px;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #0f3460;
+  font-weight: 600;
+}
+
+footer {
+  background: rgba(0, 0, 0, 0.3);
+  color: #aaa;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 13px;
+}
+
+footer a {
+  color: #e94560;
+}

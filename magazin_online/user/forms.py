@@ -11,13 +11,13 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'first_name', 'last_name', 'phone_no', 'password1', 'password2']
-
+    
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data.get('email')
         user.first_name = self.cleaned_data.get('first_name')
         user.last_name = self.cleaned_data.get('last_name')
-
+        
         if commit:
             user.save()
             # Create or update UserProfile with phone_no

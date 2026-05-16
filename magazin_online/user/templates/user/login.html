@@ -9,54 +9,9 @@
   <title>Log In — ShopZone</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-    body {
-      background: linear-gradient(135deg, #1a1a2e, #0f3460);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    .auth-wrapper {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 15px;
-    }
-    .auth-card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 40px;
-      width: 100%;
-      max-width: 420px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    }
-    .auth-card .brand {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      color: #0f3460;
-      margin-bottom: 8px;
-    }
-    .auth-card .subtitle {
-      text-align: center;
-      color: #888;
-      margin-bottom: 30px;
-      font-size: 15px;
-    }
-    .btn-primary-custom {
-      background: #e94560; color: #fff; border: none;
-      width: 100%; padding: 12px; font-size: 16px; border-radius: 4px;
-    }
-    .btn-primary-custom:hover { background: #c73652; color: #fff; }
-    .divider { text-align: center; color: #bbb; margin: 20px 0; font-size: 13px; }
-    .register-link { text-align: center; margin-top: 20px; font-size: 14px; }
-    .register-link a { color: #0f3460; font-weight: 600; }
-    footer { background: rgba(0,0,0,0.3); color: #aaa; padding: 15px 0; text-align: center; font-size: 13px; }
-    footer a { color: #e94560; }
-  </style>
   {% if messages %}{% for message in messages %}
   <script>window.addEventListener('DOMContentLoaded',function(){alert("{{ message }}");});</script>
   {% endfor %}{% endif %}
@@ -65,10 +20,10 @@
 <body>
 
   <!-- Minimal Navbar -->
-  <nav class="navbar navbar-inverse" style="margin-bottom:0;">
+  <nav class="navbar navbar-inverse navbar-minimal">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="{% url 'index' %}" style="font-weight:bold;">&#128722; ShopZone</a>
+        <a class="navbar-brand navbar-brand-bold" href="{% url 'index' %}">&#128722; ShopZone</a>
       </div>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{% url 'index' %}">Home</a></li>
